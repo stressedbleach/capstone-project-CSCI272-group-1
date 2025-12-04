@@ -1,3 +1,5 @@
+#ifndef TRANSACTION_H
+#define TRANSACTION_H
 #include <iostream>
 #include <ostream>
 #include <fstream>
@@ -33,3 +35,5 @@ class Cart : public MenuDisplay {
         friend ofstream& operator<<(ofstream& out, const Cart& other);
         
 };
+
+#define // TRANSACTION_H
