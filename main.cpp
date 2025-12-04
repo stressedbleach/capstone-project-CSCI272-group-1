@@ -1,58 +1,79 @@
 // main file - executable code ONLY
-// Simridhi Sharma
+// Simridhi Sharma (add your names here)
 
 #include "account.h"
 #include <iostream>
 using namespace std;
 
-<<<<<<< HEAD
 void displayMainMenu() {
-    cout << "====Welcome to Our Food Delivery Serivce!====\n";
-    cout << "\n\n"
-        
-    cout << "Would You Like To: ";
+    cout << "==== Welcome to Our Food Delivery Service! ====\n";
+    cout << "\n";
+    cout << "Would You Like To:\n";
     cout << "1. Create An Account\n";
     cout << "2. Login to Account\n";
     cout << "3. Exit\n";
     cout << "\n";
-        
     cout << "Choice: ";
 }
 
 void userMenu() {
-    cout << "====User Menu====\n";
-    cout << "\n\n"
-        
-    cout << "Would You Like To: ";
+    cout << "==== User Menu ====\n";
+    cout << "\n";
+    cout << "Would You Like To:\n";
     cout << "1. View Restaurant Menu\n";
     cout << "2. Add/Remove Items from Your Cart\n";
     cout << "3. Logout from Account\n";
-    cout << "4. Logout\n"
+    cout << "4. Exit\n";   
     cout << "\n";
-        
     cout << "Choice: ";
 }
 
-int main(){
-    //create accountmanager with file name for storing accounts
-=======
 int main() {
->>>>>>> ba09d79 (changed and moved functions around since main.cpp cannot have "business logic")
+    // create AccountManager with file name for storing accounts
     AccountManager manager("userAccounts.txt");
 
-    char choice;
-    cout << "Do you have an account? (y/n): ";
-    cin >> choice;
+    bool running = true;
+    while (running) {
+        displayMainMenu();
+        int choice;
+        cin >> choice;
 
-    if (choice == 'y' || choice == 'Y') {
-        manager.handleLogin();  // move login logic into a function
-    } else {
-        manager.handleAccountCreation();  // move account creation logic into a function
+        if (choice == 1) {
+            manager.handleAccountCreation();
+        } else if (choice == 2) {
+            manager.handleLogin();
+
+            // After login, show user menu
+            bool userLoggedIn = true;
+            while (userLoggedIn) {
+                userMenu();
+                int userChoice;
+                cin >> userChoice;
+
+                if (userChoice == 1) {
+                    cout << "Displaying restaurant menu...\n";
+                    // TODO: call your Restaurant/MenuDisplay class here
+                } else if (userChoice == 2) {
+                    cout << "Add/Remove items from cart...\n";
+                    // TODO: implement cart logic here
+                } else if (userChoice == 3) {
+                    cout << "Logging out...\n";
+                    userLoggedIn = false; // return to main menu
+                } else if (userChoice == 4) {
+                    cout << "Exiting program...\n";
+                    userLoggedIn = false;
+                    running = false; // exit entire program
+                } else {
+                    cout << "Invalid choice. Try again.\n";
+                }
+            }
+        } else if (choice == 3) {
+            cout << "Exiting program...\n";
+            running = false;
+        } else {
+            cout << "Invalid choice. Try again.\n";
+        }
     }
 
     return 0;
-<<<<<<< HEAD
-
-=======
->>>>>>> ba09d79 (changed and moved functions around since main.cpp cannot have "business logic")
 }
