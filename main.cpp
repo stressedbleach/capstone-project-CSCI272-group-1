@@ -5,6 +5,33 @@
 #include <iostream>
 using namespace std;
 
+void displayMainMenu() {
+    cout << "====Welcome to Our Food Delivery Serivce!====\n";
+    cout << "\n\n"
+        
+    cout << "Would You Like To: ";
+    cout << "1. Create An Account\n";
+    cout << "2. Login to Account\n";
+    cout << "3. Exit\n";
+    cout << "\n";
+        
+    cout << "Choice: ";
+}
+
+void userMenu() {
+    cout << "====User Menu====\n";
+    cout << "\n\n"
+        
+    cout << "Would You Like To: ";
+    cout << "1. View Restaurant Menu\n";
+    cout << "2. Add/Remove Items from Your Cart\n";
+    cout << "3. Logout from Account\n";
+    cout << "4. Logout\n"
+    cout << "\n";
+        
+    cout << "Choice: ";
+}
+
 int main(){
     //create accountmanager with file name for storing accounts
     AccountManager manager("userAccounts.txt");
