@@ -27,6 +27,15 @@ class Cart : public MenuDisplay {
         bool addItem(const string& item);
         bool removeItem(const string& item);
 
+        // functions to return the subPrice, tip, and total
+        double getSubPrice();
+        double getTip();
+        double tipAmount = getTip();
+        double getTotal();
+
+        // displays the final price
+        void displayPrice();
+
         /* friend functions that (respectively):
             - print out the current cart using ostream operator overloading
             - save the final transaction to a file using ofstream operator overloading
