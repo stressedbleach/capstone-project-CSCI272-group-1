@@ -155,7 +155,60 @@ bool Cart::removeItem(const string& item) {
     cout << "Item not in cart.\n";
     return false;
 }
+// function to calculate the sub price
+double Cart::getSubPrice()  {
+    // loop for calculation
+    double subPrice {0.00};
+    for (const auto& item : cartItems) {
+        auto it = menu.find(item);
+        // if not found, subPrice is set to the value-side of the menu item
+        if (it != menu.end()) {
+            subPrice += it->second;
+        }
+    }
 
+    // return subPrice
+    return subPrice;
+}
+
+// function to get the tip from user
+double Cart::getTip() {
+    double userTip {0.00};
+    
+    // loops if conditons are not meant
+    do {
+        cout << "Insert tip amount: ";
+        cin >> userTip;
+        cin.ignore(1000, '\n');
+
+        // prints message if input is not a double or greater than $0.00
+        if (!inputValidation() || userTip < 0.00) {
+            cout << "Tip must be a number greater than $0.00.\n";
+        }
+    } while (!inputValidation() || userTip < 0.00);
+
+    return userTip;
+}
+
+// function to calculate the total
+double Cart::getTotal() {
+    subPrice = getSubPrice();
+    tipAmount = getTip();
+    totalPrice = ((subPrice + tipAmount) * taxRate) + deliveryFee;
+
+    return totalPrice;
+}
+
+// prints the current price values
+void Cart::displayPrice() {
+    cout << "==== Prices ====\n" << fixed << setprecision(2);
+    cout << left << setw(15) << "Sub Price:" << right << setw(10) << '$' << setw(8) << getSubPrice() << '\n';
+    cout << left << setw(15) << "Delivery Fee:" << right << setw(10) << '$' << setw(8) << deliveryFee << '\n';
+    cout << left << setw(15) << "After Tax:" << right << setw(10) << '$' << setw(8) << taxRate * (getSubPrice() + deliveryFee) << '\n';
+    cout << left << setw(15) << "Tip:" << right << setw(10) << '$' << setw(8) << getTip() << '\n';
+    cout << "----------------\n";
+    cout << left << setw(15) << "Total: $" << right << setw(10) << '$' << setw(8) << getTotal() << '\n';
+}
 // function to print the current cart
 ostream& operator<<(ostream& out, const Cart& other) {
     
