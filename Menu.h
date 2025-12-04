@@ -34,7 +34,7 @@ class Restaurant {
     void showMenu(const vector<Restaurant>& restaurant);
 };
 
-// MenuDisplay class (created by -)
+// MenuDisplay class (created by - Jonatahn)
 class MenuDisplay : public Restaurant {
 protected:
     // map for storing menu items
@@ -51,6 +51,7 @@ public:
     void displayItem(const string& itemName) const;
     void fileReader(const string& file);
     
+    // returns current menu
     map<string, double> getMenu(const map<string, double>& menu) {
         return menu;
     }
@@ -58,8 +59,10 @@ public:
     // destructor
     ~MenuDisplay() = default;
 
+    // declares Cart class as friend (easiest way to access menu)
     friend class Cart;
     
 };
 
 #endif // RESTAURANT_MENU_H
+
